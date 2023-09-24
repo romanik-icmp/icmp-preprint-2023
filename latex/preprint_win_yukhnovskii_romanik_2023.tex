@@ -1,0 +1,799 @@
+%
+%  Це зразок оформлення тексту у \LaTeX-файлі для
+%  подання його до друку у вигляді препринту ІФКС НАНУ.
+%
+%  Інформацію про LaTeX та його кирилізацію можна знайти за адресою:
+%  http://ph.icmp.lviv.ua/~ashv/tex/TeXandUkrainian.win.html
+%
+
+% Рекомендується використання LaTeX 2e
+\documentclass[]{article}
+\usepackage{mathtext}           % При використанні кирилиці у формулах
+\usepackage{physics}
+\usepackage{amsmath,amssymb}    % amssymb for fraktur M
+\usepackage{graphicx}           % Для вставляння рисунків
+\usepackage[T2A]{fontenc}       % Кодування шрифтів і українських
+                                % переносів (T2A або LCY)
+\usepackage[cp1251]{inputenc}   % Кодування кирилиці
+%\usepackage[ukrainian]{babel}   % ukrainian для препринтів українською
+\usepackage[english]{babel}   % english   для препринтів англійською
+
+\usepackage{cite}
+\usepackage{icmpprep}           % основний стильовий файл
+
+%\usepackage[square]{nastbib}
+\usepackage{hyperref} % for hyperlinks in references
+\usepackage[nameinlink]{cleveref}
+
+% Якщо немає LaTeX 2e, тоді закоментувати усі рядки вище
+% і розкоментувати рядок нижче
+%\documentstyle[icmpprep,ukrainian]{article}
+
+% Для нумерації формул по розділах
+% Equation numbers by sections
+\eqsecnum
+
+% Назва (мовою основного тексту):
+% Title:
+
+\title{Grand Partition Function Functional for Simple Fluids}
+
+% Автори (мовою основного тексту):
+% Authors:
+
+\author{
+I.R.~Yukhnovskii,
+R.V.~Romanik\thanks{Institute for Condensed Matter Physics of NAS of Ukraine, 79011
+Lviv,\newline 1~Svientsitskii Street}
+}
+
+\sloppy
+
+\begin{document}
+%\Ukrainian
+
+\makepreprint{23}{???}
+
+\begin{abstracts}
+
+% Номер УДК:
+% UDK numbers:
+%
+\udk{538.9; 536.71; 536}
+%
+% PACS numbers:
+%
+\pacs{05.70.Ce, 64.60.Fr, 64.70.Fx}
+%
+% Назва українською мовою:
+% Title in ukrainian:
+%
+\uat{Функціонал великої статистичної суми для простих плинів}
+%
+% Автори українською мовою:
+% Authors in ukrainian:
+%
+\uaa{І.Р.~Юхновський, Р.В.~Романік}
+%
+% Анотація українською мовою:
+% Abstract in ukrainian:
+%
+\abstractu{
+В роботі послідовно представлено метод колективних змінних з системою відліку для класичної системи багатьох взаємодіючих частинок у великому канонічному ансамблі. Основна увага приділена деталям обчислень. Зокрема, використання повних кореляційних функцій означених для великого канонічного ансамблю дозволило детально дослідити кумулянти великої статистичної суми системи відліку. Показано, що будь-який кумулянт $\mathfrak{M}_n$ можна представити як добуток трьох компонент: середнього числа частинок системи відліку, символ Кронекера $n$ хвильових векторів, і $n$-частинкового структурного фактора.\\
+Отримано функціональний вираз для великогї статисничної суми в якому всі величини представлені в явному вигляді. Розраховані координати критичної точки в наближенні середнього поля.
+}
+%
+% Назва англійською мовою:
+% Title in english:
+%
+\eat{Grand Partition Function Functional for Simple Fluids}
+%
+% Автори англійською мовою:
+% Authors in english:
+%
+\eaa{I.R.~Yukhnovskii, R.V.~Romanik}
+%
+% Анотація англійською мовою:
+% Abstract in english:
+%
+\abstracte{
+In this paper, we will systematically present the method of collective variables with a reference system for a classical many-particle interacting system in the grand canonical ensemble. The emphasis will be placed on the details of calculations. In particular, the usage of total correlation functions defined for the grand canonical ensemble allows us to investigate very accurately the cumulants of the grand partition function for the reference system. It is shown that any cumulant $\mathfrak{M}_n$ can be expressed as a product of three components: the average particle number within the reference system, a Kronecker’s symbol for $n$ wave vectors, and the $n$-particle structure factor.\\
+The functional expression for the grand partition function is derived, with all coefficients explicitly defined. The coordinates of the critical point are computed in the mean field approximation.
+}
+%
+% До якого журналу буде надіслано цю роботу.
+% Якщо в український, то слід вказати в квадратних дужках
+% також назву журналу латинкою, напр.:
+% \submitted{Українського фізичного журналу}[Ukrainian Journal of Physics]
+%
+% To what journal the paper is submitted:
+%
+\submitted{Ukrainian Journal of Physics}
+%
+% окремо (не обов'язково) вказується рік подання препринту до друку:
+%
+\year 2023
+\end{abstracts}
+
+\tableofcontents
+
+\section{Introduction}
+The method of collective variables (CV) was developed in \cite{zubarev1954,Yukh1958en}, and applied to description of classical equilibrium systems~\cite{YukhHol1980book_en} and phase transitions of the second order~\cite{Yukh1987book}. A more thorough review of results achieved with the method is presented in~\cite{Yukh2015En}. 
+The method was then extended to describe the system of interacting particles in the grand canonical ensemble. For simple fluids, the noticeable works are~\cite{Yukh1989tmpEn,Yukh1990,YukhJSP1995}. For many-component systems see~\cite{Pats1990tmf,PatsJSP1995}. The concept of a reference system (RS) was used along with the CV method. The interaction between particles was arbitrary divided into short-range repulsive and long-range attractive parts. The short-range repulsive part was usually considered as the reference system.
+In the current work we systematically introduce the collective variables in the grand canonical ensemble. We would like to emphasize the following distinguishable points of this work.
+\begin{itemize}
+	\item The factor of $1/\sqrt{N}$ is not used in the expressions for the Fourier components of the microscopic particle density, which somewhat simplifies the summation over $N$ in the grand partition function (GPF).
+	\item We use total correlation functions defined in the grand canonical ensemble which makes the expressions for cumulants of the reference system grand partition function much simpler compared to ones obtained in~\cite{Yukh1990,YukhJSP1995}. This also helps avoid complications related to explicitly performing thermodynamic limit in those expressions.
+	\item The theory is presented in such a way that the reference system is not specified in general but is chosen as a hard-sphere system only to obtain numerical results for some quantities.
+\end{itemize}
+We obtain an explicit functional expression for the GPF of the classical many-particle interacting system with all coefficients known. The obtained expression is analogous to the one obtained in~\cite{Yukh1990} except the coefficients are revisited using more modern definitions for total correlation functions. Some properties of these correlation functions are additionally investigated in Appendix~\ref{sec:total_corr_func}.
+We conclude the work with calculation of the critical point coordinates in the mean-field (MF) approximation. The obtained value for the packing fraction is the same as was obtained in~\cite{YukhJSP1995}, thus showing that for this quantity a higher approach still needs to be developed. The obtained value for the critical temperature is higher that the corresponding value reported in~\cite{YukhJSP1995}, since the latter was obtained in a non-MF approximation. Finally, the critical value calculated for the excess chemical potential is published for the first time.
+
+\input{./problem_statement}
+
+\input{./cumulants}
+
+\input{./gpf_in_cv}
+
+\input{./effective_hamiltonian}
+
+\section{Conclusion}
+We have obtained the functional-integral representation for the grand partition function for the classical many-particle interacting system. The main result is presented with Eq.~(\ref{Xi_L_1}). This expression will be subject to applying the renormalization group transformation near the liquid-gas critical point in future works. In this paper, the mean-field approximation was applied to calculate the coordinates of critical point, using a system of hard-spheres with the Morse potential as an example.
+
+\appendix
+
+\renewcommand{\theequation}{A.\arabic{equation}}
+
+\section{\label{sec:total_corr_func} Total correlation functions}
+\subsection{Definitions}
+The definition of the n-particle distribution function is taken from \cite{HANSEN2013ch2} (see Eq.~(2.6.7) therein)
+\begin{equation}
+	\label{def:g_n}
+	g^{(n)}(\vb{r}^n)=\frac{\rho^{(n)}(\vb{r}_1,\dotsc,\vb{r}_n)}{\prod_{i=1}^{n}\rho^{(1)}(\vb{r}_i)}
+\end{equation}
+where $\rho^{(n)}$ is the n-particle density (see Eq.~(2.6.1) in \cite{HANSEN2013ch2}), which is defined as:
+\begin{eqnarray}
+	\label{def:rho_n}
+	\rho^{(n)}(\vb r^n) = \frac{1}{\Xi}\sum_{N=n}^{\infty} \frac{z^N}{(N-n)!} \int\exp(-\beta U_N) d\vb r^{(N-n)}
+\end{eqnarray}
+Here $\vb r^n \equiv \vb r_1, \dotsc, \vb r_n$, and $d\vb r^{(N-n)} = d\vb r_{n+1} \dotsc d\vb r_N$.
+
+Let's introduce an hierarchy of total correlation functions. The most widely known element of this hierarchy is the pair correlation function
+\begin{equation}
+	\label{def:pair_corr_func}
+	h^{(2)}(\vb{r}_1,\vb{r}_2) = g^{(2)}(\vb{r}_1,\vb{r}_2) - 1
+\end{equation}
+(e.g., see Eq.~(2.6.8) in~\cite{HANSEN2013ch2}).
+
+Let's express the total correlation functions in terms of the n-particle distribution functions.
+Formally, one can introduce the hierarchy of total correlation functions starting from $n=1$ and on.
+By definition
+\begin{equation}
+	g^{(1)}(\vb{r})\equiv 1.
+\end{equation}
+Thus, for $n=1$ one has: 
+\begin{equation}
+	h^{(1)}(\vb{r}) = g^{(1)}(\vb{r}) = 1.
+\end{equation}
+
+For $n=2$:
+\begin{equation}
+	h^{(2)}(\vb{r}_1,\vb{r}_2) = g^{(2)}(\vb{r}_1,\vb{r}_2) - 1
+\end{equation}
+
+For $n=3$:
+\begin{eqnarray}
+	h^{(3)}(\vb{r}_1 ,\vb{r}_2, \vb{r}_3) &=& g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_3) - g^{(2)}(\vb{r}_1, \vb{r}_2) 
+	\nonumber\\
+	&&-g^{(2)}(\vb{r}_1,\vb{r}_3) -  g^{(2)}(\vb{r}_2,\vb{r}_3) +2.
+\end{eqnarray}
+
+For $n=4$ :
+\begin{eqnarray}
+	h^{(4)}(\vb{r}_1, \vb{r}_2, \vb{r}_3, \vb{r}_4) &=& g^{(4)}(\vb{r}_1, \vb{r}_2, \vb{r}_3, \vb{r}_4) - g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_3) 
+	\nonumber\\
+	&&-g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_4) -  g^{(3)}(\vb{r}_1, \vb{r}_3, \vb{r}_4) - g^{(3)}(\vb{r}_2, \vb{r}_3, \vb{r}_4) 
+	\nonumber\\
+	&&-g^{(2)}(\vb{r}_1,\vb{r}_2) g^{(2)}(\vb{r}_3,\vb{r}_4) - g^{(2)}(\vb{r}_1,\vb{r}_3) g^{(2)}(\vb{r}_2,\vb{r}_4) 
+	\nonumber\\
+	&& - g^{(2)}(\vb{r}_1,\vb{r}_4)g^{(2)}(\vb{r}_2,\vb{r}_3)
+	\nonumber\\
+	&&+2(g^{(2)}(\vb{r}_1,\vb{r}_2) + g^{(2)}(\vb{r}_1,\vb{r}_3) + g^{(2)}(\vb{r}_1,\vb{r}_4)
+	\nonumber\\
+	&&+g^{(2)}(\vb{r}_2,\vb{r}_3) + g^{(2)}(\vb{r}_2,\vb{r}_4) + g^{(2)}(\vb{r}_3,\vb{r}_4)) 
+	\nonumber\\
+	&&-6.
+\end{eqnarray}
+
+\subsection{Expressed via $g^{(n)}$ and $h^{(m<n)}$}
+The total correlation functions $h^{(n)}$ can be expressed via $g^{(n)}$ and $h^{(m<n)}$.
+Such representation for total correlation functions $h^{(3)}$ and $h^{(4)}$ was used in \cite{attardJCP1990}.
+
+For $n=3$:
+\begin{eqnarray}
+	h^{(3)}(\vb{r}_1 ,\vb{r}_2, \vb{r}_3) &=& g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_3) - h^{(2)}(\vb{r}_1, \vb{r}_2) 
+	\nonumber\\
+	&&-h^{(2)}(\vb{r}_1,\vb{r}_3) -  h^{(2)}(\vb{r}_2,\vb{r}_3) -1.
+\end{eqnarray}
+
+For $n=4$:
+\begin{eqnarray}
+	h^{(4)}(\vb{r}_1, \vb{r}_2, \vb{r}_3, \vb{r}_4) &=& g^{(4)}(\vb{r}_1, \vb{r}_2, \vb{r}_3, \vb{r}_4) - h^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_3) 
+	\nonumber\\
+	&&-h^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_4) -  h^{(3)}(\vb{r}_1, \vb{r}_3, \vb{r}_4) - h^{(3)}(\vb{r}_2, \vb{r}_3, \vb{r}_4) 
+	\nonumber\\
+	&&-h^{(2)}(\vb{r}_1,\vb{r}_2) h^{(2)}(\vb{r}_3,\vb{r}_4) - h^{(2)}(\vb{r}_1,\vb{r}_3) h^{(2)}(\vb{r}_2,\vb{r}_4) 
+	\nonumber\\
+	&&- h^{(2)}(\vb{r}_1,\vb{r}_4)h^{(2)}(\vb{r}_2,\vb{r}_3)
+	\nonumber\\
+	&&-h^{(2)}(\vb{r}_1,\vb{r}_2) - h^{(2)}(\vb{r}_1,\vb{r}_3) - h^{(2)}(\vb{r}_1,\vb{r}_4)
+	\nonumber\\
+	&&-h^{(2)}(\vb{r}_2,\vb{r}_3) - h^{(2)}(\vb{r}_2,\vb{r}_4) - h^{(2)}(\vb{r}_3,\vb{r}_4) 
+	\nonumber\\
+	&&-1.
+\end{eqnarray}
+
+From here it's straightforward to express $g^{(n)}$ via $h^{(m)}$, where $m \leq n$ (in \cite{hernandoPRA1986} such expressions were presented for $n\leq3$).
+
+\subsection{Expressed via $g^{(n)}$ through $g^{(1)}$}
+For $n=2$:
+\begin{eqnarray}
+	h^{(2)}(\vb{r}_1,\vb{r}_2) = g^{(2)}(\vb{r}_1,\vb{r}_2) - g^{(1)}(\vb{r}_1) g^{(1)}(\vb{r}_2)
+\end{eqnarray}
+
+For $n=3$:
+\begin{eqnarray}
+	h^{(3)}(\vb{r}_1 ,\vb{r}_2, \vb{r}_3) &=& g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_3) - g^{(2)}(\vb{r}_1, \vb{r}_2) g^{(1)}(\vb{r}_3)
+	\nonumber\\
+	&&-g^{(2)}(\vb{r}_1,\vb{r}_3) g^{(1)}(\vb{r}_2) -  g^{(2)}(\vb{r}_2,\vb{r}_3) g^{(1)}(\vb{r}_1)
+	\nonumber\\
+	&& +2g^{(1)}(\vb{r}_1)g^{(1)}(\vb{r}_2)g^{(1)}(\vb{r}_3).
+\end{eqnarray}
+
+For $n=4$ :
+\begin{eqnarray}
+	&&h^{(4)}(\vb{r}_1, \vb{r}_2, \vb{r}_3, \vb{r}_4) =
+	\nonumber\\
+	&&= g^{(4)}(\vb{r}_1, \vb{r}_2, \vb{r}_3, \vb{r}_4) 
+	\nonumber\\
+	&&- g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_3) g^{(1)}(\vb{r}_4) - g^{(3)}(\vb{r}_1, \vb{r}_2, \vb{r}_4) g^{(1)}(\vb{r}_3) 
+	\nonumber\\
+	&&- g^{(3)}(\vb{r}_1, \vb{r}_3, \vb{r}_4) g^{(1)}(\vb{r}_2) - g^{(3)}(\vb{r}_2, \vb{r}_3, \vb{r}_4)g^{(1)}(\vb{r}_1) 
+	\nonumber\\
+	&&-g^{(2)}(\vb{r}_1,\vb{r}_2) g^{(2)}(\vb{r}_3,\vb{r}_4) - g^{(2)}(\vb{r}_1,\vb{r}_3) g^{(2)}(\vb{r}_2,\vb{r}_4) - g^{(2)}(\vb{r}_1,\vb{r}_4)g^{(2)}(\vb{r}_2,\vb{r}_3)
+	\nonumber\\
+	&& + 2[g^{(2)}(\vb{r}_1,\vb{r}_2)g^{(1)}(\vb{r}_3) g^{(1)}(\vb{r}_4) + g^{(2)}(\vb{r}_1,\vb{r}_3) g^{(1)}(\vb{r}_2) g^{(1)}(\vb{r}_4) 
+	\nonumber\\
+	&& + g^{(2)}(\vb{r}_1,\vb{r}_4)g^{(1)}(\vb{r}_2)g^{(1)}(\vb{r}_3) + g^{(2)}(\vb{r}_2,\vb{r}_3)g^{(1)}(\vb{r}_2) g^{(1)}(\vb{r}_4)
+	\nonumber\\
+	&& + g^{(2)}(\vb{r}_2,\vb{r}_4)g^{(1)}(\vb{r}_1) g^{(1)}(\vb{r}_3) + g^{(2)}(\vb{r}_3,\vb{r}_4)g^{(1)}(\vb{r}_1) g^{(1)}(\vb{r}_2) ]
+	\nonumber\\
+	&&-6g^{(1)}(\vb{r}_1) g^{(1)}(\vb{r}_2)g^{(1)}(\vb{r}_3) g^{(1)}(\vb{r}_4).
+\end{eqnarray}
+
+Equivalent representations for n-point correlation functions were used in \cite{white1979} in research on galaxy clustering.
+
+To simplify notation, let's denote $(\vb{r}_1, \dotsc, \vb{r}_n) = (1, \dotsc, n)$. And let's group similar terms under summation sings.
+Then $h^{(3)}$ and $h^{(4)}$ can be rewritten as
+\begin{eqnarray}
+	h^{(3)}(1,2,3) &=& g^{(3)}(1, 2, 3) 
+	- \sum_{\vb l = \left\{\substack{1,2,3 \\ 1,3,2 \\ 2,3,1} \right\} } g^{(2)}(l_1,l_2) g^{(1)}(l_3)
+	\nonumber\\
+	&& +2g^{(1)}(1)g^{(1)}(2)g^{(1)}(3).
+\end{eqnarray}
+\begin{eqnarray}
+	h^{(4)}(1,2,3,4) &=& g^{(4)}(1,2,3,4) 
+	- \sum_{\vb l = \left\{\substack{1,2,3,4 \\ 1,2,4,3 \\ 1,3,4,2 \\ 2,3,4,1}\right\} }g^{(3)}(l_1,l_2,l_3) g^{(1)}(l_4) 
+	\nonumber\\
+	&&-\sum_{\vb l = \left\{ \substack{1,2,3,4 \\ 1,3,2,4 \\ 1,4,2,3} \right\}}g^{(2)}(l_1,l_2) g^{(2)}(l_3,l_4)
+	\nonumber\\
+	&& + 2\sum_{\vb l = \left\{\substack{1,2,3,4 \\ 1,3,2,4 \\ 1,4,2,3 \\ 2,3,1,4 \\ 2,4,1,3 \\ 3,4,1,2} \right\}} g^{(2)}(l_1,l_2)g^{(1)}(l_3) g^{(1)}(l_4) 
+	\nonumber\\
+	&&-6g^{(1)}(1) g^{(1)}(2)g^{(1)}(3) g^{(1)}(4).
+\end{eqnarray}
+
+The sums extend over all distinct argument lists in which each point appears exactly once. E.g. $g^{(3)}(1,2,3)$ and $g^{(3)}(3,2,1)$ are not considered distinct, and terms such as $g^{(2)}(1,2)g^{(2)}(2,3)$ do not appear \cite{white1979}.
+
+\subsection{Fourier components of total correlation functions}
+The following generic notation is used for the Fourier components of the total correlation function:
+\begin{eqnarray}
+	&&\hat{h}^{(n)}(\vb{k}_1,\dotsc, \vb{k}_n) 
+	\\
+	&&= \int \exp(-i\vb{k}_1\vb{r}_1 - \dotsc - i\vb{k}_n\vb{r}_n) h^{(n)}(\vb{r}_1, \dotsc, \vb{r}_n) d\vb{r}_1\dotsc d\vb{r}_n
+	\nonumber
+\end{eqnarray}
+By properly selecting the origin, it can be shown that for a homogeneous isotropic system:
+\begin{equation}
+	g^{(n)}(\vb{r}_1, \dotsc, \vb{r}_n) = g^{(n)}(\vb{r}_1 - \vb{r}_n, \dotsc, \vb{r}_{n-1} - \vb{r}_{n})
+\end{equation}
+and applying a proper change of variables it can be written as:
+\begin{equation}
+	g^{(n)} = g^{(n)}(\vb{r}_1, \dotsc, \vb{r}_{n-1})
+\end{equation}
+Thus,
+\begin{equation}
+	h^{(n)}(\vb{r}_1, \dotsc, \vb{r}_n) \Rightarrow h^{(n)}(\vb{r}_1, \dotsc, \vb{r}_{n-1})
+\end{equation}
+
+It enables us to write the following expressions for the Fourier components $\hat{h}^{(n)} (\vb{k}^n)$:
+\begin{equation}
+	\frac{1}{V}\hat{h}^{(n)} (\vb{k}^n) = \hat{h}^{(n)} (\vb{k}_1, \dotsc, \vb{k}_{n-1}) 
+	\delta_{\vb{k}_1+\dotsc + \vb{k}_n}
+\end{equation}
+where
+\begin{eqnarray}
+	&&\hat{h}^{(n)}(\vb{k}_1, \dotsc, \vb{k}_{n-1}) 
+	\\
+	&&= \int \exp(-i\vb{k}_1\vb{r}_1 - \dotsc - i\vb{k}_{n-1}\vb{r}_{n-1}) h^{(n)}(\vb{r}_1, \dotsc, \vb{r}_{n-1})d\vb{r}_1\dotsc d\vb{r}_{n-1}
+	\nonumber
+\end{eqnarray}
+
+In particular, for $n=1$:
+\begin{equation}
+	\hat{h}^{(1)}(\vb{k}) = \int \exp(-i\vb{k}\vb{r})h^{(1)}(\vb{r})d\vb{r} = \int \exp(-i\vb{k}\vb{r})d\vb{r}
+\end{equation}
+\begin{equation}
+	\frac{1}{V}\hat{h}^{(1)}(\vb{k}) = \delta_{\vb{k}}
+\end{equation}
+
+For $n=2$:
+\begin{equation}
+	\frac{1}{V}\hat{h}^{(2)}(\vb{k}_1, \vb{k}_2) = \hat{h}^{(2)}(\vb{k}_1)\delta_{\vb{k}_1 + \vb{k}_2}
+\end{equation}
+
+\subsection{Fourier transform of the radial correlation function for the hard-spheres system}
+From~\cite{Ashcroft1966} (see Eqs.~(3)-(5) therein) an explicit expression for $\hat{h}^{(2)}(k)$ can be calculated in the Percus-Yevick approximation.
+Figure~\ref{h2_vs_k} shows the dependency of $\hat{h}^{(2)}(k)/\sigma^3$ on $k \sigma$. Figure~\ref{h2_vs_eta} shows the dependency of $\hat{h}^{(2)}(0)/\sigma^3$ on packing fraction $\eta.$
+\begin{figure}[htbp]
+	\includegraphics[width=0.45\textwidth,angle=0]{h2_as_function_of_k_at_different_eta} \hfill
+	\includegraphics[width=0.45\textwidth,angle=0]{h2_as_function_of_eta_at_k_equals_0} \\
+	\parbox{0.5\textwidth}{\caption{\label{h2_vs_k} Fourier transform of the total correlation function $\hat{h}^{(2)}(k)/\sigma^3$ as a function of $k\sigma$ at different values of packing fraction $\eta$. $\eta = 0.05$, $\eta=0.1$, $\eta = 0.15$, and $\eta=0.2$.
+	}} \hfill
+	\parbox{0.45\textwidth}{\caption{\label{h2_vs_eta} Fourier transform of the total correlation function $\hat{h}^{(2)}(k)$ divided by the cube of HS diameter $\sigma$ as a function of packing fraction $\eta$ at $\vb k = 0$
+	}}
+\end{figure}
+
+\subsection{Some recurrence relations for correlation functions}
+In this section, some recurrence relations for the total correlation functions $h^{(n)}$ will be derived. Let's use equations for the $n$-particle density from~\cite{Schofield1966} (Eq.~(A7) therein):
+\begin{equation}
+	\frac{\partial\rho^{(n)}}{\partial\rho}\bigg|_T = \frac{n\rho^{(n)} 
+		+ \int \{ \rho^{(n+1)}(\vb r_1, \dotsc, \vb r_{n+1}) - \rho^{(n)}(\vb r_1, \dotsc, \vb r_n) \rho^{(1)}(\vb r_{n+1}) \} {\rm d} \vb r_{n+1}}
+	{(1/V)\int \rho^{(1)}(\vb r_1) {\rm d} \vb r_1 + \int \{ \rho^{(2)}(\vb r_1, \vb r_2) - \rho^{(1)}(\vb r_1)\rho^{(1)}(\vb r_2) \} {\rm d} \vb r_1}
+	\nonumber
+\end{equation}
+which is rewritten in terms of the $n$-particle distribution functions as (Eq.~(A8) in~\cite{Schofield1966})
+\begin{equation}
+	\label{recur_g}
+	\frac{\partial (\rho^n g^{(n)})}{\partial\rho} \bigg|_T 
+	= \frac{n\rho^{n-1}g^{(n)} + \rho^n \int \{g^{(n+1)}(\vb r_1, \dots, \vb r_{n+1}) - g^{(n)}(\vb r_1, \dots, \vb r_n)\} {\rm d} \vb r_{n+1}}
+	{1 + \rho\int \{g^2(\vb r_1, \vb r_2) - 1\} {\rm d} \vb r_1}
+\end{equation}
+
+First, consider $n=2$ and rewrite~(\ref{recur_g}) in terms of correlation functions:
+\begin{eqnarray}
+	&&\frac{\partial}{\partial\rho}\left(\rho^2 h^{(2)}(\vb r_1, \vb r_2) + \rho^2\right) =
+	\nonumber\\
+	&&= \frac
+	{2\rho(h^{(2)}(\vb r_1, \vb r_2) + 1) + \int \left(h^{(3)}(\vb r_1, \vb r_2, \vb r_3) + h^{(2)}(\vb r_1, \vb r_3) + h^{(2)}(\vb r_2, \vb r_3) \right) {\rm d}{\vb r_3}}
+	{1 + \rho \hat{h}^{(2)}(0)}.
+	\nonumber
+\end{eqnarray}
+Then apply the following Fourier transformation to the above equation:
+\begin{equation}
+	\mathcal{F}_2(\dots) = \iint {\rm e}^{-{\rm i}\vb k_1 \vb r_1 - {\rm i} \vb k_2 \vb r_2} \dots {\rm d} \vb r_1 {\rm d} \vb r_2
+\end{equation}
+As a result, after some algebraic manipulations, the following relations between $\hat{h}^{(3)}$ and $\hat{h}^{(2)}$ are obtained:
+\begin{equation}
+	\hat{h}^{(3)}(\vb k_1, \vb k_2, 0) = 2 \hat{h}^{(2)}(0)\hat{h}^{(2)}(\vb k_1, \vb k_2) + \frac{\partial \hat{h}^{(2)}(\vb k_1, \vb k_2)}{\partial\rho}(1 + \rho\hat{h}^{(2)}(0)),
+	\nonumber
+\end{equation}
+\begin{equation}
+	\label{recur_h3_h2}
+	\hat{h}^{(3)}(k, -k) = 2 \hat{h}^{(2)}(0)\hat{h}^{(2)}(k) + \frac{\partial \hat{h}^{(2)}(k)}{\partial\rho}(1 + \rho\hat{h}^{(2)}(0)).
+\end{equation}
+
+Similarly, the relations between $\hat{h}^{(4)}$ and $\hat{h}^{(3)}$ are following:
+\begin{equation}
+	\hat{h}^{(4)}(\vb k_1, \vb k_2, \vb k_3, 0) = 3\hat{h}^{(2)}(0)\hat{h}^{(3)}(\vb k_1, \vb k_2, \vb k_3) + \frac{\partial \hat{h}^{(3)}(\vb k_1, \vb k_2, \vb k_3)} {\partial \rho} (1 + \rho\hat{h}^{(2)}(0)),
+	\nonumber
+\end{equation}
+\begin{equation}
+	\label{recur_h4_h3}
+	\hat{h}^{(4)}(\vb k_1, \vb k_2, 0) = 3\hat{h}^{(2)}(0)\hat{h}^{(3)}(\vb k_1, \vb k_2) + \frac{\partial \hat{h}^{(3)}(\vb k_1, \vb k_2)} {\partial \rho} (1 + \rho\hat{h}^{(2)}(0))
+\end{equation}
+The relations~(\ref{recur_m3_m2}) and~(\ref{recur_m4_m2}) for cumulants follow directly from~(\ref{recur_h3_h2}) and~(\ref{recur_h4_h3}), respectively.
+
+\renewcommand{\theequation}{B.\arabic{equation}}
+
+\section{\label{app:cumulant_calc}Cumulants calculation}
+For the sake of simplicity, in this Appendix we will omit the subscript $0$ at the notation for averages, $\langle\dotsc\rangle_0 \Rightarrow  \langle\dotsc\rangle$, and also will understand $\Psi_N \equiv\Psi_N(\vb r^N)$.
+\subsection{$n=1$}
+\begin{equation}
+	\mathfrak{M}_1(\vb k) = \langle \hat{\rho}_{\vb k} \rangle.
+\end{equation}
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k} \rangle &=& \Xi_0^{-1} \sum_{N=0}^{\infty} \frac{z_0^N}{N!} \int \sum_{j=1}^N \exp(-{\rm i}\vb k\vb r_j) \exp(-\beta\Psi_N) {\rm d} {\vb r}^N 
+	\nonumber\\
+	&=&\Xi_0^{-1} \sum_{N=0}^{\infty} \frac{z_0^N}{N!} \int \exp(-{\rm i}\vb k\vb{r}') \sum_{j=1}^N \delta(\vb r' - \vb r_j) \exp(-\beta\Psi_N) {\rm d} {\vb r}^N {\rm d}{\vb r'}
+	\nonumber\\
+	&=&\int \exp(-{\rm i}\vb k\vb{r}') \left\langle \sum_{j=1}^N \delta(\vb r' - \vb r_j) \right\rangle {\rm d}{\vb r'}
+\end{eqnarray}
+It can be shown that (see Eq~(2.5.11) and p.40 in~\cite{HANSEN2013ch2})
+\begin{equation}
+	\left\langle \sum_{j=1}^N \delta(\vb r' - \vb r_j) \right\rangle = \rho^{(1)}(\vb r')
+\end{equation}
+where $\rho^{(1)}(\vb r)$ is the equilibrium singe-particle density.
+
+For a homogeneous system (uniform fluid):
+\begin{equation}
+	\rho^{(1)}(\vb r) = \frac{\langle N\rangle}{V}
+\end{equation}
+Thus
+\begin{equation}
+	\langle \hat{\rho}_{\vb k} \rangle = \frac{\langle N\rangle }{V} \int \exp(-{\rm i}\vb k \vb r') {\rm d} \vb r' = \langle N\rangle \delta_{\vb k}.
+\end{equation}
+\begin{equation}
+	\boxed{
+		\mathfrak{M}_1(\vb k) = \langle N\rangle \delta_{\vb k}.
+	}
+\end{equation}
+
+\subsection{$n=2$}
+\begin{equation}
+	\mathfrak{M}_2(\vb k_1, \vb k_2)
+	= \langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle - \langle \hat{\rho}_{\vb k_1} \rangle \langle\hat{\rho}_{\vb k_2} \rangle.
+\end{equation}
+
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& \Xi_0^{-1} \sum_{N=0}^{\infty} \frac{z_0^N}{N!} \int 
+	\sum_{i=1}^N \exp(-{\rm i}\vb k_1\vb r_i) \sum_{j=1}^N \exp(-{\rm i}\vb k_2\vb r_j) \exp(-\beta\Psi_N) {\rm d} {\vb r}^N
+	\nonumber
+\end{eqnarray}
+Let's single out the term with $i=j$:
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& 
+	\Xi_0^{-1} \sum_{N=0}^{\infty} \frac{z_0^N}{N!} \int 
+	\left[
+	\sum_{i=1}^N \exp(-{\rm i}(\vb k_1 +  \vb k_2)\vb r_i)
+	\right. 
+	\nonumber\\
+	&& \left. + \sum_{i=1}^N \exp(-{\rm i}\vb k_1\vb r_i) \sum_{j=1 \atop j\neq i}^N \exp(-{\rm i}\vb k_2\vb r_j) 
+	\right]\exp(-\beta\Psi_N) {\rm d} {\vb r}^N
+	\nonumber
+\end{eqnarray}
+The first term is $\langle\hat{\rho}_{\vb k_1 + \vb k_2} \rangle$ and thus is equal to $\langle N \rangle\delta_{\vb k_1 + \vb k_2}$.
+Let's rewrite the second term via $\delta$-functions:
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& \langle N \rangle\delta_{\vb k_1 + \vb k_2}
+	\nonumber\\
+	&&+ \Xi_0^{-1} \sum_{N=0}^{\infty} \frac{z_0^N}{N!} \int 
+	{\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''} 
+	\nonumber\\
+	&& \times \sum_{i=1}^N  \sum_{j=1 \atop j\neq i}^N \delta(\vb r'- \vb r_i) \delta(\vb r'' - \vb r_j)
+	\exp(-\beta\Psi_N) {\rm d} {\vb r}^N {\rm d} {\vb r'} {\rm d} {\vb r''}
+	\nonumber\\
+	&=& 
+	\langle N \rangle\delta_{\vb k_1 + \vb k_2} 
+	\nonumber\\
+	&&+ \iint {\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''}  
+	\left\langle \sum_{i=1}^N  \sum_{j=1 \atop j\neq i}^N \delta(\vb r'- \vb r_i) \delta(\vb r'' - \vb r_j) \right\rangle {\rm d} {\vb r'} {\rm d} {\vb r''}
+	\nonumber
+\end{eqnarray}
+From \cite{HANSEN2013ch2} (see Eq~(2.5.13) and the last paragraph on p.40 therein) it follows
+\begin{equation}
+	\left\langle \sum_{i=1}^N  \delta(\vb r'- \vb r_i) \sum_{j=1 \atop j\neq i}^N \delta(\vb r'' - \vb r_j) \right\rangle = \rho^{(2)}(\vb r', \vb r'')
+\end{equation}
+where $\rho^{(2)}(\vb r', \vb r'')$ is the equilibrium 2-particle density, or just the pair density
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& \langle N \rangle\delta_{\vb k_1 + \vb k_2} + 
+	\iint {\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''}  
+	\rho^{(2)}(\vb r', \vb r'') {\rm d} {\vb r'} {\rm d} {\vb r''}.
+\end{eqnarray}
+Taking into account the definition~(\ref{def:g_n}) of the $n$-particle distribution function $g^{(n)}$, and the relationship between $\rho^{(n)}$ and $g^{(n)}$ for a homogeneous system
+\begin{equation}
+	\rho^{(n)}(\vb r^n) = \rho^n g^{(n)}(\vb r^n)
+\end{equation}
+where $\rho = \langle N \rangle / V$ is the particle density, one arrives at
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& \langle N \rangle\delta_{\vb k_1 + \vb k_2} \\
+	&+& 
+	\rho^2 \iint {\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''}  
+	g^{(2)}(\vb r', \vb r'') {\rm d} {\vb r'} {\rm d} {\vb r''}. \nonumber
+\end{eqnarray}
+Here $g^{(2)}(\vb r', \vb r'')$ is called the pair distribution function.
+Taking into account the definition~(\ref{def:pair_corr_func}) for the pair (total) correlation function $h^{(2)}$, one has
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& \langle N \rangle\delta_{\vb k_1 + \vb k_2} + 
+	\rho^2 \iint {\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''}  
+	h^{(2)}(\vb r', \vb r'') {\rm d} {\vb r'} {\rm d} {\vb r''}
+	\nonumber\\
+	&+& \frac{\langle N \rangle^2}{V^2}\iint {\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''} {\rm d} {\vb r'} {\rm d} {\vb r''}.
+\end{eqnarray}
+The last term is equal to $\langle N \rangle^2 \delta_{\vb k_1}\delta_{\vb k_2}.$ 
+For isotropic system $h^{(2)}(\vb r', \vb r'') = h^{(2)}(\abs{\vb r' - \vb r''})$, and the second term becomes
+\begin{eqnarray}
+	&\frac{\langle N \rangle^2}{V^2} &\iint {\rm e}^{-{\rm i}\vb k_1\vb r'} {\rm e}^{-{\rm i}\vb k_2\vb r''} {\rm d} {\vb r'} {\rm d} {\vb r''} = 
+	\left| \substack{\text{Change of variables:} \\ \vb r = \vb r' - \vb r''; \quad \vb R = \vb r'' \\
+		\vb r' = \vb R + \vb r; \quad \vb r'' = \vb R \\ {\rm d} \vb r'{\rm d} \vb r'' = {\rm d} \vb r{\rm d} \vb R } 
+	\right| 
+	\nonumber\\
+	&=& \frac{\langle N \rangle^2}{V^2} \int \exp(-{\rm i}(\vb k_1 + \vb k_2)\vb R) {\rm d} \vb R
+	\int \exp(-{\rm i}\vb k_1 \vb r) h^{(2)}(r) {\rm d}\vb r
+	\nonumber\\
+	&=& \frac{\langle N \rangle^2}{V} \hat{h}^{(2)}(\vb k_1) \delta_{\vb{k}_1 + \vb{k}_2} = 
+	\langle N \rangle \rho \hat{h}^{(2)}(\vb k_1) \delta_{\vb{k}_1 + \vb{k}_2}.
+\end{eqnarray}
+One arrives at the final expression for $\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle$:
+\begin{eqnarray}
+	\langle \hat{\rho}_{\vb k_1} \hat{\rho}_{\vb k_2} \rangle &=& \langle N \rangle\delta_{\vb k_1 + \vb k_2} + 
+	\langle N \rangle \rho \hat{h}^{(2)}(\vb k_1) \delta_{\vb{k}_1 + \vb{k}_2}
+	+ \langle N \rangle^2 \delta_{\vb k_1}\delta_{\vb k_2}
+	\nonumber.
+\end{eqnarray}
+And for the cumulant $\mathfrak{M}_2$ the final expression is
+\begin{equation}
+	\boxed{
+		\mathfrak{M}_2(\vb k_1, \vb k_2) = \langle N \rangle \delta_{\vb{k}_1 + \vb{k}_2} (1 + \rho\hat{h}^{(2)}(\vb 	k_1)) 
+	}
+\end{equation}
+
+The quantity $1 + \rho \hat{h}^{(2)}(\vb k)$ is equal to the static structure factor of the uniform fluid (see~\cite{HANSEN2013ch2}, Eq.~(3.6.10)):
+\begin{equation}
+	S(\vb k) = 1 + \hat{h}^{(2)}(\vb k)
+\end{equation}
+\begin{equation}
+	\mathfrak{M}_2(\vb k_1, \vb k_2)  = \langle N \rangle \delta_{\vb{k}_1 + \vb{k}_2} S(\vb k_1).
+\end{equation}
+The structure factor is related to the thermodynamic properties via the following relationship (see Eqs.~(2.6.12), (3.5.14), and~(3.6.11) in~\cite{hansen2013theory}):
+\begin{equation}
+	S(0) = 1 + \rho\hat{h}^{(2)}(0) = \rho \chi_T / \beta = \frac{\langle N^2 \rangle - \langle N \rangle^2}{\langle N \rangle},
+\end{equation}
+where $\chi_T$ is the isothermal compressibility.
+Thus for $\vb k_1 = \vb k_2 = 0$:
+\begin{equation}
+	\boxed{
+		\mathfrak{M}_2(0,0) = \langle N^2 \rangle - \langle N \rangle^2
+	}
+\end{equation}
+
+\renewcommand{\theequation}{C.\arabic{equation}}
+
+\section{\label{app:cumulant_calc_k_0}A method of calculation for cumulants at $\vb k_i = 0$}
+It follows from~(\ref{def:cumulant}) and~(\ref{def:jacob_tilde}), that 
+\begin{eqnarray}
+	\mathfrak{M}_n(0, \dotsc, 0) &=& \frac{1}{(-{\rm i}2\pi)^n} \frac{\partial^n \ln \langle\exp(-{\rm i}2\pi \sum_{\vb k} \omega_{\vb k}\hat{\rho}_{\vb k}) \rangle_0}
+	{\partial\omega_0^n} \bigg|_{\omega_{\vb k_i} = 0}
+	\nonumber\\
+	&=& \frac{\partial^n \ln \Xi_0}{\partial(\beta\mu_0)^n} 
+	= \frac{\partial^{n-1}\langle N \rangle_0}{\partial(\beta\mu_0)^{n-1}} 
+	= \frac{\partial^{n-1}\mathfrak{M}_1(0)}{\partial(\beta\mu_0)^{n-1}}
+	\nonumber\\
+	&=& \frac{\partial\mathfrak{M}_{n-1}(0,\dotsc,0)}{\partial(\beta\mu_0)}.
+\end{eqnarray}
+Then from~(\ref{def:average_rs}) one derives
+\begin{equation}
+	\frac{\partial \langle N \rangle_0}{\partial(\beta\mu_0)} = \langle N^2 \rangle_0 - \langle N \rangle_0^2,
+\end{equation}
+\begin{equation}
+	\frac{\partial \langle N^2 \rangle_0}{\partial(\beta\mu_0)} = \langle N^3 \rangle_0 - \langle N^2 \rangle_0\langle N \rangle_0,
+\end{equation}
+\begin{equation}
+	\frac{\partial \langle N^3 \rangle_0}{\partial(\beta\mu_0)} = \langle N^4 \rangle_0 - \langle N^3 \rangle_0\langle N \rangle_0,
+\end{equation}
+and so on, to give in general:
+\begin{equation}
+	\frac{\partial \langle N^n \rangle_0}{\partial(\beta\mu_0)} = \langle N^{n+1} \rangle_0 - \langle N^n \rangle_0\langle N \rangle_0.
+\end{equation}
+Thus the equation for $\mathfrak{M}_2(0,0)$ is obtained immediately
+\begin{eqnarray}
+	\mathfrak{M}_2(0,0) &=& \frac{\partial \langle N \rangle_0}{\partial(\beta\mu_0)} = \langle N^2 \rangle_0 - \langle N \rangle_0^2 
+	\nonumber\\
+	&=& \langle (N - \langle N \rangle_0)^2 \rangle_0. 
+\end{eqnarray}
+Explicit calculation for $\mathfrak{M}_3(0,0,0)$ leads to
+\begin{eqnarray}
+	\mathfrak{M}_3(0,0,0) &=& \frac{\partial}{\partial(\beta\mu_0)}\left(\langle N^2 \rangle_0 - \langle N \rangle_0^2\right) 
+	\nonumber\\
+	&=& \langle (N - \langle N \rangle_0)^3 \rangle_0.
+\end{eqnarray}
+And for $\mathfrak{M}_4(0,0,0,0):$
+\begin{eqnarray}
+	\mathfrak{M}_4(0,0,0,0) &=& \frac{\partial}{\partial(\beta\mu_0)}
+	\left(\langle N^3 \rangle_0 - 3\langle N^2 \rangle_0\langle N \rangle_0 +2 \langle N \rangle_0^3\right) 
+	\nonumber\\
+	&=& \langle (N - \langle N \rangle_0)^4 \rangle_0 - 3 \langle (N - \langle N \rangle_0)^2 \rangle_0^2.
+\end{eqnarray}
+
+\include{./notation}
+
+%\newpage
+
+%\bibliographystyle{apsrev4-2}
+%\bibliographystyle{plain}
+%\bibliographystyle{plainnat}
+%\bibliography{fluids_cv,fluids_general,correlation_functions,books_romanik_bibliography,online_urls}
+
+\begin{thebibliography}{99}
+		
+	\bibitem{zubarev1954}
+	D.N. Zubarev.
+	\newblock Computation of configuration integrals for a system of particles with
+	coulomb interaction.
+	\newblock {\em Dokl. Acad. Nauk SSSR}, 95(4):757--760, 1954.
+	
+	\bibitem{Yukh1958en}
+	I.R. Yukhnovskii.
+	\newblock Use of collective variables and treatment of short-range forces in
+	the theory of a system of charged particles.
+	\newblock {\em Sov. Phys. JETP}, 7(2):263--270, 1958.
+	
+	\bibitem{YukhHol1980book_en}
+	I.R. Yukhnovskii and M.F. Holovko.
+	\newblock {\em Statistical Theory of Classical Equilibrium Systems}.
+	\newblock Naukova Dumka, Kyiv, 1980.
+	
+	\bibitem{Yukh1987book}
+	I.R. Yukhnovskii.
+	\newblock {\em Phase Transitions of the Second Order. Collective Variables
+	Method}.
+	\newblock World Scientific, Singapore, 1987.
+
+	\bibitem{Yukh2015En}
+	I.~R. Yukhnovskii.
+	\newblock Phase transitions in a vicinity of the vapor-liquid critical point.
+	\newblock {\em Ukrainian Journal of Physics}, 10(1):33, 2015.
+	
+	\bibitem{Yukh1989tmpEn}
+	I.~R. Yukhnovskii.
+	\newblock Method of collective variables with references system for the grand
+	canonical ensemble.
+	\newblock {\em Theoretical and Mathematical Physics}, 79(2):536--546, May 1989.
+
+	\bibitem{Yukh1990}
+	I.R. Yukhnovskii.
+	\newblock The functional of the grand partition function for the investigation
+	of the liquid-gas critical point.
+	\newblock {\em Physica A: Statistical Mechanics and its Applications},
+	168(3):999--1020, 1990.
+
+	\bibitem{YukhJSP1995}
+	I.~R. Yukhnovskii, I.~M. Idzyk, and V.~O. Kolomiets.
+	\newblock Investigation of a homogeneous many-particle system in the vicinity
+	of the critical point.
+	\newblock {\em Journal of Statistical Physics}, 80(1-2):405--443, July 1995.
+	
+	\bibitem{Pats1990tmf}
+	O.~V. Patsagan and I.~R. Yukhnovskii.
+	\newblock Functional of the grand partition function in the method of
+	collective variables with distinguished reference system. multicomponent
+	system.
+	\newblock {\em Theoretical and Mathematical Physics}, 83(1):387--395, April
+	1990.
+	
+	\bibitem{PatsJSP1995}
+	I.R. Yukhnovskii and O.V. Patsahan.
+	\newblock Grand canonical distribution for multicomponent system in the
+	collective variables method.
+	\newblock {\em Journal of Statistical Physics}, 81(3-4):647--672, 1995.
+
+	\bibitem{stuart2010kendall}
+	Alan Stuart and Keith Ord.
+	\newblock {\em Kendall's Advanced Theory of Statistics, Distribution Theory}.
+	\newblock Kendall's Advanced Theory of Statistics. Wiley, 2010.
+	
+	\bibitem{HANSEN2013ch3}
+	Jean-Pierre Hansen and Ian~R. McDonald.
+	\newblock Chapter 3 - static properties of liquids: Thermodynamics and
+	structure.
+	\newblock In Jean-Pierre Hansen and Ian~R. McDonald, editors, {\em Theory of
+		Simple Liquids (Fourth Edition)}, pages 61--104. Academic Press, Oxford,
+	fourth edition edition, 2013.
+	
+	\bibitem{Idzik1987En}
+	I.~M. Idzik, V.~A. Kolomiets, and I.~R. Yukhnovskii.
+	\newblock Liquid-gas critical point in the method of collective variables.
+	\newblock {\em Theoretical and Mathematical Physics}, 73(2):1204--1217,
+	November 1987.
+	
+	\bibitem{cameron1995comb}
+	Peter~J. Cameron.
+	\newblock {\em Combinatorics: Topics, Techniques, Algorithms}.
+	\newblock Cambridge University Press, 1st edition edition, 1994.
+	
+	\bibitem{wikiBellNum}
+	\url{https://en.wikipedia.org/wiki/Bell\_number}.
+	
+	\bibitem{wikiStirlingNum2}
+	\url{https://en.wikipedia.org/wiki/Stirling\_numbers\_of\_the\_second\_kind}.
+	
+	\bibitem{Ashcroft1966}
+	N.~W. Ashcroft and J.~Lekner.
+	\newblock Structure and resistivity of liquid metals.
+	\newblock {\em Phys. Rev.}, 145:83--90, May 1966.
+	
+	\bibitem{Schofield1966}
+	P~Schofield.
+	\newblock Wavelength-dependent fluctuations in classical fluids: I. the long
+	wavelength limit.
+	\newblock {\em Proceedings of the Physical Society}, 88(1):149, may 1966.
+	
+	\bibitem{CarnahanStarling1969}
+	Norman~F. Carnahan and Kenneth~E. Starling.
+	\newblock Equation of state for nonattracting rigid spheres.
+	\newblock {\em The Journal of Chemical Physics}, 51(2):635--636, 1969.
+	
+	\bibitem{Yukh2013}
+	I.~R. Yukhnovskii, V.~O. Kolomiets, and I.~M. Idzyk.
+	\newblock Liquid gas phase transition at and below the critical point.
+	\newblock {\em Condensed Matter Physics}, 16(2):23604, 2013.
+	
+	\bibitem{WertheimPRL1963}
+	M.~S. Wertheim.
+	\newblock Exact solution of the percus-yevick integral equation for hard
+	spheres.
+	\newblock {\em Phys. Rev. Lett.}, 10:321--323, 1963.
+	
+	\bibitem{ThieleJCP1963}
+	Everett Thiele.
+	\newblock {Equation of State for Hard Spheres}.
+	\newblock {\em The Journal of Chemical Physics}, 39(2):474--479, 1963.
+	
+	\bibitem{ReeHooverJCP1964}
+	Francis~H. Ree and William~G. Hoover.
+	\newblock Fifth and sixth virial coefficients for hard spheres and hard disks.
+	\newblock {\em The Journal of Chemical Physics}, 40(4):939--950, 1964.
+	
+	\bibitem{Yukh2014}
+	I.~R. Yukhnovskii.
+	\newblock The phase transition of the first order in the critical region of the
+	gas-liquid system.
+	\newblock {\em Condensed Matter Physics}, 17(4):43001, December 2014.
+	
+	\bibitem{HANSEN2013ch2}
+	Jean-Pierre Hansen and Ian~R. McDonald.
+	\newblock Chapter 2 - statistical mechanics.
+	\newblock In Jean-Pierre Hansen and Ian~R. McDonald, editors, {\em Theory of
+		Simple Liquids (Fourth Edition)}, pages 13--59. Academic Press, Oxford,
+	fourth edition edition, 2013.
+		
+	\bibitem{attardJCP1990}
+	Phil Attard.
+	\newblock Integral equations and closure relations for the bridge function and
+	for the triplet correlation function.
+	\newblock {\em The Journal of Chemical Physics}, 93(10):7301--7309, 1990.
+	
+	\bibitem{hernandoPRA1986}
+	J.~A. Hernando.
+	\newblock Exact and approximate expressions for the three-particle direct
+	correlation function and some related functions.
+	\newblock {\em Phys. Rev. A}, 33:1338--1348, Feb 1986.
+	
+	\bibitem{white1979}
+	S.~D.~M. {White}.
+	\newblock {The hierarchy of correlation functions and its relation to other
+		measures of galaxy clustering.}
+	\newblock {\em Monthly Notices of the Royal Astronomical Society},
+	186:145--154, January 1979.
+	
+	\bibitem{hansen2013theory}
+	J.P. Hansen and I.R. McDonald.
+	\newblock {\em Theory of Simple Liquids: with Applications to Soft Matter}.
+	\newblock Academic Press, 4th edition, 2013.
+		
+\end{thebibliography}
+
+\end{document}
+
+% В кінці подається інформація про препринт
+\info
+% Повністю ім'я, по-батькові та прізвище авторів
+   {Ігор Рафаїлович Юхновський\\
+   Роман Васильович Романік}
+% Назва українською
+   {Функціонал великої статистичної суми для простих плинів}
+% Дата подання до видавничої групи
+   {19 вересня 2023 р.}
+% Яким відділом рекомендовано до друку
+   {відділом Статистичної теорії конденсованих систем}
+
+\end{document}
