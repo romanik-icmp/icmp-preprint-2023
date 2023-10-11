@@ -1,5 +1,9 @@
 # Preprint ICMP-23-01E
 Contains resources used for ICMP preprint ICMP-23-01E.
+### Links
+https://www.icmp.lviv.ua/preprints/2023/23-01e
+
+https://www.icmp.lviv.ua/en/preprints/2023/23-01e
 
 ## Description
 
